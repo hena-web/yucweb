@@ -296,26 +296,31 @@ export default function DonationPage() {
                     ×
                   </button>
                   <h4 className="font-bold text-lg mb-4 text-blue-700">İhtiyacı Olan Okullar</h4>
-                  <table className="min-w-full text-left text-sm mb-2">
-                    <thead className="bg-gray-100 font-medium">
-                      <tr>
-                        <th className="px-4 py-2">OKUL ADI</th>
-                        <th className="px-4 py-2">İHTİYAÇ ADEDİ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredNeeds.map((entry, index) => (
-                        <tr
-                          key={index}
-                          className={`cursor-pointer ${selectedSchool === entry.school ? 'bg-gray-100' : ''}`}
-                          onClick={() => setSelectedSchool(entry.school)}
-                        >
-                          <td className="px-4 py-2">{entry.school}</td>
-                          <td className="px-4 py-2">{entry.count}</td>
+                  <div style={{ maxHeight: '350px', overflowY: 'auto', overflowX: 'hidden' }}>
+                    <table className="min-w-full text-left text-sm mb-2">
+                      <thead className="bg-gray-100 font-medium">
+                        <tr>
+                          <th className="px-4 py-2">OKUL ADI</th>
+                          <th className="px-4 py-2">İHTİYAÇ ADEDİ</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {filteredNeeds.map((entry, index) => (
+                          <tr
+                            key={index}
+                            className={`cursor-pointer ${selectedSchool === entry.school ? 'bg-gray-100' : ''}`}
+                            onClick={() => {
+                              setSelectedSchool(entry.school);
+                              setFilteredNeeds([]); // Okul seçilince popup kapansın
+                            }}
+                          >
+                            <td className="px-4 py-2">{entry.school}</td>
+                            <td className="px-4 py-2">{entry.count}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                   <p className="text-xs text-gray-500">Bir okula tıklayarak seçebilirsiniz.</p>
                 </div>
               </div>
